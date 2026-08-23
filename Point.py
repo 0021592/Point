@@ -1,11 +1,23 @@
 from math import sqrt, cos, sin
 class Point:
     def __init__(self, x = 0.0, y = 0.0, z = 0.0):
-        self.x = x
-        self.y = y
-        self.z = z 
+        if isinstance(x, list) or isinstance(x, tuple):
+            self.x = x[0]
+            self.y = x[1]
+            self.z = x[2]
+        else:
+            self.x = x
+            self.y = y
+            self.z = z 
     def __getitem__(self, index):
-        return self[index]
+        if index == 0:
+            return self.x
+        elif index == 1:
+            return self.y
+        elif index == 2:
+            return self.z
+        else:
+            raise IndexError("Index out of range")
     def __eq__(self, other):
         return (epsilonEq(self.x, other.x)) & (epsilonEq(self.y, other.y)) & (epsilonEq(self.z, other.z))
     def __str__(self):
@@ -18,7 +30,7 @@ class Point:
         round(self.x, roundDecimal)
         round(self.y, roundDecimal)
         round(self.z, roundDecimal)
-    def transfromToList(self):
+    def transformToList(self):
         return [self.x, self.y, self.z]
     def pointToDistance(self):
         return sqrt(self.x**2 + self.y**2 + self.z ** 2)
