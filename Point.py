@@ -1,5 +1,5 @@
 from math import sqrt, cos, sin
-class Point:
+class Point(BaseException):
     def __init__(self, x = 0.0, y = 0.0, z = 0.0):
         if isinstance(x, list) or isinstance(x, tuple):
             self.x = x[0]
@@ -32,7 +32,7 @@ class Point:
         round(self.z, roundDecimal)
     def transformToList(self):
         return [self.x, self.y, self.z]
-    def pointToDistance(self):
+    def distanceToOrigin(self):
         return sqrt(self.x**2 + self.y**2 + self.z ** 2)
     def distanceToPoint(self, a):
         if not isinstance(a, Point):
@@ -51,7 +51,7 @@ class Point:
         self.y = self.y - a.y
         self.z = self.z - a.z
 EPSILON = 0.000001
-def epsilonEq(a, b):
+def epsilonEq(a, b, EPSILON = EPSILON):
     if (a < b) & ((a + EPSILON) < b):
         return 0
     if (a > b) & ((a - EPSILON) > b):
