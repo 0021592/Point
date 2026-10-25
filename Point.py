@@ -9,6 +9,10 @@ class Point(BaseException):
             self.x = x
             self.y = y
             self.z = z 
+    def __copy__(self):
+        return Point(self.x, self.y, self.z)
+    def __deepcopy__(self, memo): #x, y, z are numbers, so this is a full copy, and much faster than the generic one (Point is a BaseException)
+        return Point(self.x, self.y, self.z)
     def __getitem__(self, index):
         if index == 0:
             return self.x
